@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title%}
+projects list
+{% endblock title %}
+{% block stylesheets %}
+{{ block.super}}
+{% endblock stylesheets %}
+{% block body %}
+<header>
+    {% block header %}
+    {% include 'header.html' %}
+    {% endblock header %}
+
+</header>
+{% block content %}
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+
+        <th scope="col">Product Name</th>
+        <th scope="col">Product price</th>
+        <th scope="col">Product quantity</th>
+        <th scope="col">Product image</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for data in products %}
+    <tr>
+        <th scope="row"><a href="{% url 'product' data.id %}">{{ data.name }}</a></th>
+
+        <td>{{ data.price }}</td>
+        <td>{{ data.quantity }}</td>
+        <td> <img src="/media/{{data.image}}" height="100" width="100"> </td>
+
+    </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+{% endblock content %}
+
+<footer>
+    {% block footer %}
+    {% include 'footer.html' %}
+    {% endblock footer %}
+</footer>
+
+{% block javascript %}
+
+{% endblock javascript %}
+{% endblock body %}
