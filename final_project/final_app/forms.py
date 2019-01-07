@@ -1,6 +1,8 @@
 from django.forms import ModelForm, TextInput
 from .models import Product
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 
 # Create the form class.
@@ -8,7 +10,7 @@ class ProductForm(ModelForm):
     # name1 = forms.CharField(max_length= 50)
     class Meta:
         model = Product
-        fields = ('name', 'price', 'category')
+        fields = ('name', 'price', 'category', 'image', 'quantity', 'user')
 
         widgets = {
             'name': TextInput(attrs={'class': 'custom-class', 'placeholder': 'الاسم هنا'})
@@ -39,3 +41,19 @@ class EditProductForm(forms.Form):
         model = Product
         fields = ('name', 'price', 'category')
 
+
+class SignUpForm(UserCreationForm):
+    email = forms.EmailField(max_length=254, help_text='Required. Inform a valid email address.')
+    birth_date = forms.DateField(help_text='Required. Format: YYYY-MM-DD')
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'birth_date', 'password1', 'password2')
+
+
+PRODUCT_QUANTITY_CHOICES = [(i, str(i)) for i in range(1, 26)]
+
+
+class CartAddProductForm(forms.Form):
+    quantity = forms.TypedChoiceField(choices=PRODUCT_QUANTITY_CHOICES, coerce=int)
+    name = forms.CharField(required=False, initial=False, widget=forms.HiddenInput)

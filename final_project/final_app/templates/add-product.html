@@ -1,15 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>add product</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load i18n %}
+{% block title%}
+projects list
+{% endblock title %}
+{% block stylesheets %}
+{{ block.super}}
+{% endblock stylesheets %}
+{% block body %}
+<header>
+    {% block header %}
+    {% include 'header.html' %}
+    {% endblock header %}
+
+</header>
+{% block content %}
 <p>add product</p>
 <form method="post" action="">
     {% csrf_token %}
     {{ form.as_table }}
     <button type="submit" value="Save"> Save</button>
 </form>
-</body>
-</html>
+{% endblock content %}
+
+<footer>
+    {% block footer %}
+    {% include 'footer.html' %}
+    {% endblock footer %}
+</footer>
+
+{% block javascript %}
+
+{% endblock javascript %}
+{% endblock body %}

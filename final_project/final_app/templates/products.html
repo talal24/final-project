@@ -32,6 +32,8 @@ projects list
         <td>{{ data.price }}</td>
         <td>{{ data.quantity }}</td>
         <td> <img src="/media/{{data.image}}" height="100" width="100"> </td>
+        <td> <a href="{% url 'delete-product' data.id %}"><button>delete</button></a> </td>
+        <td> <a href="{% url 'update-product' data.id %}"><button>update</button></a> </td>
 
     </tr>
     {% endfor %}
